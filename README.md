@@ -1,2 +1,2 @@
-# Spring_JAVA
-JAVA SPRING Framework TIL
+## Spring_JAVA
+- JAVA SPRINGBoot Framework TIL
