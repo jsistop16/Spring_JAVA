@@ -1,0 +1,8 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<!--th:thymeleaf -> 동적페이지를 만들것이므로
+thymeleaf템플릿엔진을 사용해야함-->
+<body>
+<p th:text="'hello' + ${name}">hello! empty</p>
+<!--name값이 들어오면 hello! empty가 text값으로 치환-->
+</body>
+</html>
