@@ -1,31 +1,28 @@
 package hello.hellospring.service;
 
 import hello.hellospring.domain.Member;
+import hello.hellospring.repository.MemberRepository;
 import hello.hellospring.repository.MemoryMemberRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.test.context.TestExecutionListeners;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class MemberServiceTest {
-    //테스트 대상 클래스에서 바로 테스트클래스 만들수있음(ctrl+shift+t)
-    //순수 자바코드를 테스트하는것 = 단위테스트
-    MemoryMemberRepository memberRepository;
-    MemberService memberService;
+//DB까지 연동해서 한번에 테스트
+@SpringBootTest
+@Transactional//테스트가 끝나면 db 롤백해줌(데이터 삭제)
+    //테스트 메소드 마다 롤백해줌
+    //다음 테스트를 반복해서 실행할수있음
+class MemberServiceIntegrationTest {
+    //스프링 띄워서 테스트 = 통합테스트
 
-    @BeforeEach//각각의 실행을 하기전에
-    public void beforeEach() {
-        memberRepository = new MemoryMemberRepository();
-        memberService = new MemberService(memberRepository);
-    }
-
-    @AfterEach
-    public void afterEach() {
-        memberRepository.clearStore();
-    }
+    @Autowired MemberRepository memberRepository;
+    @Autowired MemberService memberService;
 
     @Test
     void join() {//회원가입
