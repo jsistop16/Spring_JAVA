@@ -20,7 +20,7 @@ public class MemberController {
     }
 
     @GetMapping("/members/new")
-    //GetMapping은 뷰리졸버에서 html코드를 맏아서 뷰템플릿엔진(thymeleaf)을 통해
+    //GetMapping은 뷰리졸버에서 html코드를 받아서 뷰템플릿엔진(thymeleaf)을 통해
     //화면 렌더링 해주는 방식
     public String createForm() {
         return "members/createMemberForm";

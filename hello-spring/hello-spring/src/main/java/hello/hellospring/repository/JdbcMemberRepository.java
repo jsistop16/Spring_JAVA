@@ -20,14 +20,14 @@ public class JdbcMemberRepository implements MemberRepository {
         String sql = "insert into member(name) values(?)";
         Connection conn = null;
         PreparedStatement pstmt = null;
-        ResultSet rs = null;
+        ResultSet rs = null;//결과를 받는것
         try {
-            conn = getConnection();
+            conn = getConnection();//connection받아오기
             pstmt = conn.prepareStatement(sql,
                     Statement.RETURN_GENERATED_KEYS);
-            pstmt.setString(1, member.getName());
-            pstmt.executeUpdate();
-            rs = pstmt.getGeneratedKeys();
+            pstmt.setString(1, member.getName());//parameterIndex는 변수 sql에서 values(?)에 ?와 매칭됨
+            pstmt.executeUpdate();//db에 실제 쿼리가 전송
+            rs = pstmt.getGeneratedKeys();//id값에 대응하는값을 꺼내줌
             if (rs.next()) {
                 member.setId(rs.getLong(1));
             } else {
@@ -41,16 +41,20 @@ public class JdbcMemberRepository implements MemberRepository {
         }
     }
     @Override
-    public Optional<Member> findById(Long id) {
+    public Optional<Member> findById(Long id) {//조회
+
         String sql = "select * from member where id = ?";
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
+
         try {
             conn = getConnection();
             pstmt = conn.prepareStatement(sql);
             pstmt.setLong(1, id);
+
             rs = pstmt.executeQuery();
+
             if(rs.next()) {
                 Member member = new Member();
                 member.setId(rs.getLong("id"));
@@ -115,6 +119,7 @@ public class JdbcMemberRepository implements MemberRepository {
     }
     private Connection getConnection() {
         return DataSourceUtils.getConnection(dataSource);
+        //DataSourceUtils를 통해서 connection해줘야함
     }
     private void close(Connection conn, PreparedStatement pstmt, ResultSet rs)
     {
@@ -141,6 +146,7 @@ public class JdbcMemberRepository implements MemberRepository {
         }
     }
     private void close(Connection conn) throws SQLException {
-        DataSourceUtils.releaseConnection(conn, dataSource);
+        DataSourceUtils.releaseConnection(conn, dataSource);//connection 풀어줌
+        //DataSourceUtils를 통해서 release해줘야함
     }
 }
