@@ -26,7 +26,7 @@ class MemberServiceIntegrationTest {
     @Autowired MemberService memberService;
 
     @Test
-    @Commit//db에 반영
+    //@Commit//db에 반영
     void join() {//회원가입
         //given
         Member member = new Member();

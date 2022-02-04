@@ -24,10 +24,20 @@ public class MemberService {
         회원가입
          */
     public long join(Member member) {
-        //비지니스 로직 : 같은 이름의 중복회원 불가
-        validateDuplicateMember(member);//중복회원 검증 메소드
-        memberRepository.save(member);
-        return member.getId();
+//        //비지니스 로직 : 같은 이름의 중복회원 불가
+//        validateDuplicateMember(member);//중복회원 검증 메소드
+//        memberRepository.save(member);
+//        return member.getId();
+        long start = System.currentTimeMillis();
+        try{
+            validateDuplicateMember(member);
+            memberRepository.save(member);
+            return member.getId();
+        }finally {
+            long finish = System.currentTimeMillis();
+            long timeMs = finish - start;
+            System.out.println("join method time = " + timeMs + "ms");
+        }
 
     }
 
