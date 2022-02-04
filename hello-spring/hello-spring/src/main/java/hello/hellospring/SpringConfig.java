@@ -1,5 +1,6 @@
 package hello.hellospring;
 
+import hello.hellospring.aop.TimeTraceAop;
 import hello.hellospring.repository.*;
 import hello.hellospring.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,12 @@ public class SpringConfig {
     public MemberService memberService() {
         return new MemberService(memberRepository);
     }
+
+//    @Bean
+//    public TimeTraceAop timeTraceAop() {
+//        return new TimeTraceAop();//aop 등록
+//    } //이렇게 직접 springconfig에 등록해줘도 되고
+//    //TimeTraceAop클래스에 직접 component 어노테이션 적용시켜도 됨
 
 //    @Bean//Repository를 스프링 컨테이너에 등록
 //    public MemberRepository memberRepository() {
