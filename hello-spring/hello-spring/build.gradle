@@ -14,7 +14,9 @@ repositories {
 
 dependencies {
 	//jdbc
-	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+	//implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+	//jpa+jdbc둘다 포함(data-jpa)
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	//h2 db
 	runtimeOnly 'com.h2database:h2'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'//html템플릿 엔진
